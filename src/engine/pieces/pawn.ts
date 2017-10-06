@@ -14,11 +14,17 @@ export default class Pawn extends Piece {
         const checkIfPlayerWhite = this.player === Player.WHITE;
         const checkIfPlayerBlack = this.player === Player.BLACK;
 
-        const newRowPosition = currentSquare.row + Number(checkIfPlayerWhite) - Number(checkIfPlayerBlack);
+        let newRowPosition = currentSquare.row + Number(checkIfPlayerWhite) - Number(checkIfPlayerBlack);
         let newColPosition = currentSquare.col;
 
         let newSquarePosition = new Square(newRowPosition, newColPosition)
         availableMoves.push(newSquarePosition);
+
+        if(this.firstMove){
+            newRowPosition = newRowPosition + Number(checkIfPlayerWhite) - Number(checkIfPlayerBlack);
+            let firstMoveSquarePosition = new Square(newRowPosition, newColPosition)
+            availableMoves.push(firstMoveSquarePosition);
+        }
         return availableMoves;
     }
 }
