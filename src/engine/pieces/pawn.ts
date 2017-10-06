@@ -17,13 +17,17 @@ export default class Pawn extends Piece {
         let newRowPosition = currentSquare.row + Number(checkIfPlayerWhite) - Number(checkIfPlayerBlack);
         let newColPosition = currentSquare.col;
 
-        let newSquarePosition = new Square(newRowPosition, newColPosition)
-        availableMoves.push(newSquarePosition);
+        let newSquarePosition = new Square(newRowPosition, newColPosition);
+        if(!board.getPiece(newSquarePosition)) {
+            availableMoves.push(newSquarePosition);
+        }
 
         if(this.firstMove){
             newRowPosition = newRowPosition + Number(checkIfPlayerWhite) - Number(checkIfPlayerBlack);
             let firstMoveSquarePosition = new Square(newRowPosition, newColPosition)
-            availableMoves.push(firstMoveSquarePosition);
+            if(!board.getPiece(newSquarePosition) && !board.getPiece(firstMoveSquarePosition)) {
+                availableMoves.push(firstMoveSquarePosition);
+            }
         }
         return availableMoves;
     }
