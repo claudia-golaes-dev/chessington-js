@@ -14,7 +14,7 @@ export default class Piece {
     }
     
     public isValidPosition(row: number, col:number): boolean {
-        return row >= 0 && row <= 7 && col >= 1 && col <= 7;
+        return row >= 0 && row <= 7 && col >= 0 && col <= 7;
     }
 
     public addCertainMove(row: number, col:number, availableMoves: Array<Square>){

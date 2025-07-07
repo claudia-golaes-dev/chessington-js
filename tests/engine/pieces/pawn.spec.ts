@@ -39,7 +39,6 @@ describe('Pawn', () => {
         it('cannot move at the top of the board', () => {
             const pawn = new Pawn(Player.WHITE);
             board.setPiece(Square.at(7, 3), pawn);
-
             const moves = pawn.getAvailableMoves(board);
 
             moves.should.be.empty;

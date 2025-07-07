@@ -18,14 +18,15 @@ export default class Pawn extends Piece {
         let newColPosition = currentSquare.col;
 
         let newSquarePosition = new Square(newRowPosition, newColPosition);
-        if(!board.getPiece(newSquarePosition)) {
+
+        if(this.isValidPosition(newRowPosition, newColPosition) && !board.getPiece(newSquarePosition)) {
             availableMoves.push(newSquarePosition);
         }
 
-        if(this.firstMove){
+        if(this.firstMove && this.isValidPosition(newRowPosition, newColPosition)){
             newRowPosition = newRowPosition + Number(checkIfPlayerWhite) - Number(checkIfPlayerBlack);
             let firstMoveSquarePosition = new Square(newRowPosition, newColPosition)
-            if(!board.getPiece(newSquarePosition) && !board.getPiece(firstMoveSquarePosition)) {
+            if(!board.getPiece(newSquarePosition) && !board.getPiece(firstMoveSquarePosition) && this.isValidPosition(newRowPosition, newColPosition)) {
                 availableMoves.push(firstMoveSquarePosition);
             }
         }
