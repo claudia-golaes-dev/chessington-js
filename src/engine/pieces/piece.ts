@@ -44,8 +44,12 @@ export default class Piece {
             if(forwardsDiagonalRowPosition != currentSquare.row) {
                 forwardsDiagonal = Square.at(forwardsDiagonalRowPosition, forwardsDiagonalColPosition);
                 if(board.getPiece(forwardsDiagonal)){
-                    availableMoves.push(forwardsDiagonal);
-                    stopTheLoop = true;
+                    if(board.getPiece(forwardsDiagonal)?.player === this.player || board.isKing(board.getPiece(forwardsDiagonal))) {
+                        stopTheLoop = true;
+                    } else {
+                        availableMoves.push(forwardsDiagonal);
+                        stopTheLoop = true;
+                    }
                 } else {
                     availableMoves.push(forwardsDiagonal);
                 }
@@ -74,8 +78,12 @@ export default class Piece {
             if(backwardsDiagonalRowPosition != currentSquare.row) {
                 backwardsDiagonal = Square.at( backwardsDiagonalRowPosition, backwardsDiagonalColPosition);
                 if(board.getPiece(backwardsDiagonal)){
-                    availableMoves.push(backwardsDiagonal);
-                    stopTheLoop = true;
+                    if(board.getPiece(backwardsDiagonal)?.player === this.player || board.isKing(board.getPiece(backwardsDiagonal))) {
+                        stopTheLoop = true;
+                    } else {
+                        availableMoves.push(backwardsDiagonal);
+                        stopTheLoop = true;
+                    }
                 } else {
                     availableMoves.push(backwardsDiagonal);
                 }
@@ -123,7 +131,12 @@ export default class Piece {
             if(i != newRowPosition) {
                 verticalPosition = Square.at(i, newColPosition);
                 if(board.getPiece(verticalPosition)){
-                    stopTheLoop = true;
+                    if(board.getPiece(verticalPosition)?.player === this.player || board.isKing(board.getPiece(verticalPosition))) {
+                        stopTheLoop = true;
+                    } else {
+                        availableMoves.push(verticalPosition);
+                        stopTheLoop = true;
+                    }
                 } else {
                     availableMoves.push(verticalPosition);
                 }
