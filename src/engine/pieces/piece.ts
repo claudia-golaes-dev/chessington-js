@@ -5,7 +5,6 @@ import Square from '../square';
 export default class Piece {
     public player: Player;
     public firstMove = true;
-
     public constructor(player: Player) {
         this.player = player;
     }
@@ -17,7 +16,7 @@ export default class Piece {
     public isValidPosition(row: number, col:number): boolean {
         return row >= 0 && row <= 7 && col >= 1 && col <= 7;
     }
-    
+
     public addCertainMove(row: number, col:number, availableMoves: Array<Square>){
         let newSquarePosition:Square;
 
@@ -78,11 +77,16 @@ export default class Piece {
         let newRowPosition = currentSquare.row;
         let newColPosition = currentSquare.col;
         let horizontalPosition:Square;
+        let stopTheLoop = false;
 
-        for (let i = 0; i < 8 ; i++){
+        for (let i = 0; i < 8 && !stopTheLoop ; i++){
             if(i != newColPosition) {
                 horizontalPosition = Square.at(newRowPosition, i);
-                availableMoves.push(horizontalPosition);
+                if(board.getPiece(horizontalPosition)){
+                    stopTheLoop = true;
+                } else {
+                    availableMoves.push(horizontalPosition);
+                }
             }
         }
     }
@@ -93,11 +97,17 @@ export default class Piece {
         let newRowPosition = currentSquare.row;
         let newColPosition = currentSquare.col;
         let verticalPosition:Square;
+        let stopTheLoop = false;
+
 
         for (let i = 0; i < 8 ; i++){
             if(i != newRowPosition) {
                 verticalPosition = Square.at(i, newColPosition);
-                availableMoves.push(verticalPosition);
+                if(board.getPiece(verticalPosition)){
+                    stopTheLoop = true;
+                } else {
+                    availableMoves.push(verticalPosition);
+                }
             }
         }
     }
