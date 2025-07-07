@@ -15,21 +15,21 @@ export default class King extends Piece {
         let newRowPosition = currentSquare.row;
         let newColPosition = currentSquare.col;
 
-        this.addCertainMove(newRowPosition + 1, newColPosition + 1, availableMoves);
+        this.addCertainMove(newRowPosition + 1, newColPosition + 1, availableMoves, board);
 
-        this.addCertainMove(newRowPosition + 1, newColPosition, availableMoves);
+        this.addCertainMove(newRowPosition + 1, newColPosition, availableMoves, board);
 
-        this.addCertainMove(newRowPosition + 1, newColPosition - 1, availableMoves);
+        this.addCertainMove(newRowPosition + 1, newColPosition - 1, availableMoves, board);
 
-        this.addCertainMove(newRowPosition, newColPosition - 1, availableMoves);
+        this.addCertainMove(newRowPosition, newColPosition - 1, availableMoves, board);
 
-        this.addCertainMove(newRowPosition, newColPosition + 1, availableMoves);
+        this.addCertainMove(newRowPosition, newColPosition + 1, availableMoves, board);
         
-        this.addCertainMove(newRowPosition - 1, newColPosition - 1, availableMoves);
+        this.addCertainMove(newRowPosition - 1, newColPosition - 1, availableMoves, board);
 
-        this.addCertainMove(newRowPosition - 1, newColPosition + 1, availableMoves);
+        this.addCertainMove(newRowPosition - 1, newColPosition + 1, availableMoves, board);
 
-        this.addCertainMove(newRowPosition - 1, newColPosition, availableMoves);
+        this.addCertainMove(newRowPosition - 1, newColPosition, availableMoves, board);
 
         return availableMoves;
     }

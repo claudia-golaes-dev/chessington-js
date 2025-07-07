@@ -15,21 +15,21 @@ export default class Knight extends Piece {
         let newRowPosition = currentSquare.row;
         let newColPosition = currentSquare.col;
 
-        this.addCertainMove(newRowPosition + 2, newColPosition + 1, availableMoves);
+        this.addCertainMove(newRowPosition + 2, newColPosition + 1, availableMoves, board);
 
-        this.addCertainMove(newRowPosition + 2, newColPosition - 1, availableMoves);
+        this.addCertainMove(newRowPosition + 2, newColPosition - 1, availableMoves, board);
 
-        this.addCertainMove(newRowPosition - 2, newColPosition + 1, availableMoves);
+        this.addCertainMove(newRowPosition - 2, newColPosition + 1, availableMoves, board);
 
-        this.addCertainMove(newRowPosition - 2, newColPosition - 1, availableMoves);
+        this.addCertainMove(newRowPosition - 2, newColPosition - 1, availableMoves, board);
 
-        this.addCertainMove(newRowPosition + 1, newColPosition + 2, availableMoves);
+        this.addCertainMove(newRowPosition + 1, newColPosition + 2, availableMoves, board);
 
-        this.addCertainMove(newRowPosition + 1, newColPosition - 2, availableMoves);
+        this.addCertainMove(newRowPosition + 1, newColPosition - 2, availableMoves, board);
 
-        this.addCertainMove(newRowPosition - 1, newColPosition + 2, availableMoves);
+        this.addCertainMove(newRowPosition - 1, newColPosition + 2, availableMoves, board);
 
-        this.addCertainMove(newRowPosition - 1, newRowPosition - 2, availableMoves);
+        this.addCertainMove(newRowPosition - 1, newRowPosition - 2, availableMoves, board);
 
         return availableMoves;
     }

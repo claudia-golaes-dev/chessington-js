@@ -18,12 +18,18 @@ export default class Piece {
         return row >= 0 && row <= 7 && col >= 0 && col <= 7;
     }
 
-    public addCertainMove(row: number, col:number, availableMoves: Array<Square>){
+    public addCertainMove(row: number, col:number, availableMoves: Array<Square>, board:Board){
         let newSquarePosition:Square;
 
         if(this.isValidPosition(row, col)) {
             newSquarePosition = Square.at(row, col);
-            availableMoves.push(newSquarePosition);
+            if(board.getPiece(newSquarePosition)){
+                if(board.getPiece(newSquarePosition)?.player != this.player && !board.isKing(board.getPiece(newSquarePosition))) {
+                    availableMoves.push(newSquarePosition);
+                }
+            } else {
+                availableMoves.push(newSquarePosition);
+            }
         }
     }
 
