@@ -5,6 +5,7 @@ import Square from '../square';
 export default class Piece {
     public player: Player;
     public firstMove = true;
+
     public constructor(player: Player) {
         this.player = player;
     }
@@ -43,6 +44,7 @@ export default class Piece {
             if(forwardsDiagonalRowPosition != currentSquare.row) {
                 forwardsDiagonal = Square.at(forwardsDiagonalRowPosition, forwardsDiagonalColPosition);
                 if(board.getPiece(forwardsDiagonal)){
+                    availableMoves.push(forwardsDiagonal);
                     stopTheLoop = true;
                 } else {
                     availableMoves.push(forwardsDiagonal);
@@ -72,6 +74,7 @@ export default class Piece {
             if(backwardsDiagonalRowPosition != currentSquare.row) {
                 backwardsDiagonal = Square.at( backwardsDiagonalRowPosition, backwardsDiagonalColPosition);
                 if(board.getPiece(backwardsDiagonal)){
+                    availableMoves.push(backwardsDiagonal);
                     stopTheLoop = true;
                 } else {
                     availableMoves.push(backwardsDiagonal);
@@ -94,7 +97,12 @@ export default class Piece {
             if(i != newColPosition) {
                 horizontalPosition = Square.at(newRowPosition, i);
                 if(board.getPiece(horizontalPosition)){
-                    stopTheLoop = true;
+                    if(board.getPiece(horizontalPosition)?.player === this.player || board.isKing(board.getPiece(horizontalPosition))) {
+                        stopTheLoop = true;
+                    } else {
+                        availableMoves.push(horizontalPosition);
+                        stopTheLoop = true;
+                    }
                 } else {
                     availableMoves.push(horizontalPosition);
                 }
@@ -111,7 +119,7 @@ export default class Piece {
         let stopTheLoop = false;
 
 
-        for (let i = 0; i < 8 ; i++){
+        for (let i = 0; i < 8 && !stopTheLoop; i++){
             if(i != newRowPosition) {
                 verticalPosition = Square.at(i, newColPosition);
                 if(board.getPiece(verticalPosition)){
