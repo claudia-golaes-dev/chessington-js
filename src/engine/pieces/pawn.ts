@@ -22,7 +22,7 @@ export default class Pawn extends Piece {
         if(this.isValidPosition(newRowPosition, newColPosition) && !board.getPiece(newSquarePosition)) {
             availableMoves.push(newSquarePosition);
         }
-
+        
         if(this.firstMove && this.isValidPosition(newRowPosition, newColPosition)){
             newRowPosition = newRowPosition + Number(checkIfPlayerWhite) - Number(checkIfPlayerBlack);
             let firstMoveSquarePosition = new Square(newRowPosition, newColPosition)
