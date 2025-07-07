@@ -32,16 +32,21 @@ export default class Piece {
         let forwardsDiagonalRowPosition = 0;
         let forwardsDiagonalColPosition = currentSquare.col - currentSquare.row;
         let forwardsDiagonal:Square;
+        let stopTheLoop = false;
 
         while (forwardsDiagonalColPosition < 0) {
             forwardsDiagonalColPosition++;
             forwardsDiagonalRowPosition++;
         }
 
-        while (forwardsDiagonalColPosition <= 7 && forwardsDiagonalRowPosition <= 7) {
+        while (forwardsDiagonalColPosition <= 7 && forwardsDiagonalRowPosition <= 7 && !stopTheLoop) {
             if(forwardsDiagonalRowPosition != currentSquare.row) {
                 forwardsDiagonal = Square.at(forwardsDiagonalRowPosition, forwardsDiagonalColPosition);
-                availableMoves.push(forwardsDiagonal);
+                if(board.getPiece(forwardsDiagonal)){
+                    stopTheLoop = true;
+                } else {
+                    availableMoves.push(forwardsDiagonal);
+                }
             }
             forwardsDiagonalColPosition++;
             forwardsDiagonalRowPosition++;
@@ -54,6 +59,8 @@ export default class Piece {
         let backwardsDiagonalRowPosition = 0;
         let backwardsDiagonalColPosition = currentSquare.col + currentSquare.row;
         let backwardsDiagonal:Square;
+        let stopTheLoop = false;
+
 
         while (backwardsDiagonalColPosition > 7) {
             backwardsDiagonalColPosition--;
@@ -61,10 +68,14 @@ export default class Piece {
         }
 
 
-        while (backwardsDiagonalRowPosition <= 7 && backwardsDiagonalColPosition >= 0) {
+        while (backwardsDiagonalRowPosition <= 7 && backwardsDiagonalColPosition >= 0 && !stopTheLoop) {
             if(backwardsDiagonalRowPosition != currentSquare.row) {
                 backwardsDiagonal = Square.at( backwardsDiagonalRowPosition, backwardsDiagonalColPosition);
-                availableMoves.push(backwardsDiagonal);
+                if(board.getPiece(backwardsDiagonal)){
+                    stopTheLoop = true;
+                } else {
+                    availableMoves.push(backwardsDiagonal);
+                }
             }
             backwardsDiagonalColPosition--;
             backwardsDiagonalRowPosition++;
