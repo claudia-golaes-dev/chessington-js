@@ -13,6 +13,19 @@ export default class Piece {
     public getAvailableMoves(board: Board) {
         throw new Error('This method must be implemented, and return a list of available moves');
     }
+    
+    public isValidPosition(row: number, col:number): boolean {
+        return row >= 0 && row <= 7 && col >= 1 && col <= 7;
+    }
+    
+    public addCertainMove(row: number, col:number, availableMoves: Array<Square>){
+        let newSquarePosition:Square;
+
+        if(this.isValidPosition(row, col)) {
+            newSquarePosition = Square.at(row, col);
+            availableMoves.push(newSquarePosition);
+        }
+    }
 
     public getForwardDiagonalMoves(board:Board, availableMoves: Array<Square>){
         const currentSquare = board.findPiece(this);
@@ -88,6 +101,7 @@ export default class Piece {
             }
         }
     }
+    
     public moveTo(board: Board, newSquare: Square) {
         this.firstMove = false;
         const currentSquare = board.findPiece(this);
