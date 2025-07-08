@@ -124,6 +124,7 @@ export default class Piece {
         }
     }
 
+
     public getVerticalMoves(board: Board, availableMoves: Array<Square>){
         const currentSquare = board.findPiece(this);
 

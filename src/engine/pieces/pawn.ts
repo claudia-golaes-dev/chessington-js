@@ -19,10 +19,24 @@ export default class Pawn extends Piece {
 
         let newSquarePosition = new Square(newRowPosition, newColPosition);
 
-        if(this.isValidPosition(newRowPosition, newColPosition) && !board.getPiece(newSquarePosition)) {
+        if (this.isValidPosition(newRowPosition, newColPosition) && !board.getPiece(newSquarePosition)) {
             availableMoves.push(newSquarePosition);
         }
-        
+
+        let opponentRowPosition = newRowPosition;
+        let opponentColPosition = newColPosition;
+        let opponentSquare:Square;
+
+        opponentSquare =  Square.at(opponentRowPosition, opponentColPosition + 1);
+        if (this.isValidPosition(opponentRowPosition, opponentColPosition + 1) && board.getPiece(opponentSquare) && !(board.getPiece(opponentSquare)?.player === this.player || board.isKing(board.getPiece(opponentSquare)))) {
+            availableMoves.push(opponentSquare);
+        }
+
+        opponentSquare =  Square.at(opponentRowPosition, opponentColPosition - 1);
+        if (this.isValidPosition(opponentRowPosition, opponentColPosition - 1) && board.getPiece(opponentSquare)  && !(board.getPiece(opponentSquare)?.player === this.player || board.isKing(board.getPiece(opponentSquare)))) {
+            availableMoves.push(opponentSquare);
+        }
+
         if(this.firstMove && this.isValidPosition(newRowPosition, newColPosition)){
             newRowPosition = newRowPosition + Number(checkIfPlayerWhite) - Number(checkIfPlayerBlack);
             let firstMoveSquarePosition = new Square(newRowPosition, newColPosition)
