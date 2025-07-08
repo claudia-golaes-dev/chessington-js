@@ -2,13 +2,15 @@ import Player from './player';
 import GameSettings from './gameSettings';
 import Square from './square';
 import Piece from './pieces/piece';
+import King from './pieces/king';
+
 
 export default class Board {
     public currentPlayer: Player;
     private readonly board: (Piece | undefined)[][];
 
-    public constructor() {
-        this.currentPlayer = Player.WHITE;
+    public constructor(currentPlayer?: Player | undefined) {
+        this.currentPlayer = currentPlayer ? currentPlayer : Player.WHITE;
         this.board = this.createBoard();
     }
 
@@ -18,6 +20,10 @@ export default class Board {
 
     public getPiece(square: Square) {
         return this.board[square.row][square.col];
+    }
+
+    public isKing(piece:Piece | undefined){
+        return piece instanceof King;
     }
 
     public findPiece(pieceToFind: Piece) {
